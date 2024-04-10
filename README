@@ -65,6 +65,7 @@ Para realizar pruebas en el sistema:
 -- mvn clean test
 
 También se incluyen pruebas de integración para evaluar cada caso en detalle.
+Se incluyeron pruebas E2E (End to End) esto con el fin de evaluar las diferentes partes del sistema, como se espera.
  
 📚 API Documentation
 Para una visión más detallada de cómo funciona el sistema y qué APIs están disponibles, consulta nuestra documentación de API.
