@@ -1,4 +1,4 @@
-package com.example.ecommerce.api.Dto;
+package com.example.ecommerce.application.dto;
 
 
 import lombok.EqualsAndHashCode;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-// Dto de la clase Price para trabajar las respuestas de las API.
+// dto de la clase Price para trabajar las respuestas de las API.
 
 
 @Getter

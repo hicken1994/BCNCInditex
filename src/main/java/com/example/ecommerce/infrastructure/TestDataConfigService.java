@@ -1,7 +1,7 @@
-package com.example.ecommerce.boot;
+package com.example.ecommerce.infrastructure;
 
-import com.example.ecommerce.domain.entities.PriceProduct;
-import com.example.ecommerce.persistence.repository.PriceProductRepository;
+import com.example.ecommerce.domain.PriceProduct;
+import com.example.ecommerce.ports.PriceProductRepository;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Getter
 @Setter
@@ -39,15 +39,15 @@ public class TestDataConfigService {
         try {
             InputStream inputFS = new FileInputStream(new File(inputFilePath));
             BufferedReader br = new BufferedReader(new InputStreamReader(inputFS));
-            inputList = br.lines().skip(1).map(convertCSVToPrecio).collect(Collectors.toList());
+            inputList = br.lines().skip(1).map(convertCSVToPrecio).toList();
             br.close();
         } catch (IOException e) {
-            log.error("Hubo un error leyendo el archivo: {}", e.getMessage());
+            log.error("Error reading the file {}", e.getMessage());
         }
         return inputList;
     }
 
-    private static final Function<String, PriceProduct> convertCSVToPrecio = (line) -> {
+    private static final Function<String, PriceProduct> convertCSVToPrecio = line -> {
         String[] p = line.split(",");
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
         return PriceProduct.builder()

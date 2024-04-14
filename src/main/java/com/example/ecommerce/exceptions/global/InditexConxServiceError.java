@@ -1,4 +1,4 @@
-package com.example.ecommerce.api.exceptions;
+package com.example.ecommerce.exceptions.global;
 
 
 import lombok.Getter;
@@ -10,6 +10,6 @@ import java.util.Map;
 @Getter
 
 public class InditexConxServiceError {
-    private final Map<String, String[]> parametrosError;
+    private final Map<String, String[]> parametersError;
     private final String error;
 }

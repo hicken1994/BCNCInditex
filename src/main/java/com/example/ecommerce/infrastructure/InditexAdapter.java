@@ -1,4 +1,4 @@
-package com.example.ecommerce.boot;
+package com.example.ecommerce.infrastructure;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -12,8 +12,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import javax.annotation.PostConstruct;
 
 @SpringBootApplication
-@EnableJpaRepositories("com.example.ecommerce.persistence.repository")
-@EntityScan("com.example.ecommerce.domain.entities")
+@EnableJpaRepositories("com.example.ecommerce.ports")
+@EntityScan("com.example.ecommerce.domain")
 @Slf4j
 @ComponentScan(basePackages = {"com.example.ecommerce"})
 public class InditexAdapter {
@@ -24,17 +24,17 @@ public class InditexAdapter {
     public static void main(String[] args) {
         SpringApplication.run(InditexAdapter.class, args);
         Runtime.getRuntime().addShutdownHook(new Thread(InditexAdapter::shutdown));
-        log.info("===================== AdaptadorInditex Iniciando ========================");
+        log.info("===================== Starting InditexAdaptator ========================");
     }
 
     private static void shutdown() {
-        log.info("===================== AdaptadorInditex Detenido ========================");
+        log.info("===================== InditexAdaptator Ended ========================");
     }
 
     @PostConstruct
     private void initDb() {
-        log.info("****** Insertando datos de prueba ******");
+        log.info("****** Inserting Data Testing ******");
         testDataConfigService.insertarDatosPrueba();
-        log.info("****** Datos insertados correctamente ******");
+        log.info("****** Inserted Data Successfully ******");
     }
 }

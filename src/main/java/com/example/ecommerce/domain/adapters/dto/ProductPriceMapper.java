@@ -1,9 +1,10 @@
-package com.example.ecommerce.api.mapping;
+package com.example.ecommerce.domain.adapters.dto;
 
 
-import com.example.ecommerce.api.Dto.PriceDto;
-import com.example.ecommerce.domain.entities.PriceProduct;
+import com.example.ecommerce.application.dto.PriceDto;
+import com.example.ecommerce.domain.PriceProduct;
 import org.mapstruct.*;
+
 
 @Mapper(
         componentModel = "spring",
@@ -18,6 +19,6 @@ public interface ProductPriceMapper {
             @Mapping(source = "startDate", target = "startDate"),
             @Mapping(source = "endDate", target = "endDate"),
             @Mapping(source = "price", target = "price")})
-    PriceDto priceDto(final PriceProduct precioProducto);
+    PriceDto priceDto(final PriceProduct priceProduct);
 }
 

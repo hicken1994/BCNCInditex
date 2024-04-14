@@ -1,6 +1,6 @@
-package com.example.ecommerce.domain.useCases;
+package com.example.ecommerce.application;
 
-import com.example.ecommerce.domain.entities.PriceProduct;
+import com.example.ecommerce.domain.PriceProduct;
 import com.example.ecommerce.exceptions.InditexParametersNotValid;
 import com.example.ecommerce.exceptions.InditexPriceNotFound;
 import org.springframework.stereotype.Repository;

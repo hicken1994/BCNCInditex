@@ -1,4 +1,4 @@
-package com.example.ecommerce.api.exceptions;
+package com.example.ecommerce.exceptions.global;
 
 
 import com.example.ecommerce.exceptions.InditexParametersNotValid;

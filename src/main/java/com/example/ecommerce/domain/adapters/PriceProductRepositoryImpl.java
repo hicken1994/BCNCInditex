@@ -1,7 +1,7 @@
-package com.example.ecommerce.persistence.repository.impl;
+package com.example.ecommerce.domain.adapters;
 
-import com.example.ecommerce.domain.entities.PriceProduct;
-import com.example.ecommerce.persistence.repository.CustomPriceProductRepository;
+import com.example.ecommerce.domain.PriceProduct;
+import com.example.ecommerce.ports.CustomPriceProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -19,8 +19,12 @@ public class PriceProductRepositoryImpl implements CustomPriceProductRepository 
     private final String TABLE_NAME = "PRICES";
 
     private final String QUERY_GET_PRICE_PRODUCT = String.format(
-            "SELECT Brand_Id, Product_Id, Price_List, Start_Date, End_Date, Priority, Price, Curr, Last_Update, Last_Update_By " +
-                    "FROM %s WHERE Brand_id = ?1 AND Product_Id = ?2 AND Start_Date <= ?3 AND End_Date >= ?4 ORDER BY priority DESC LIMIT 1",
+            "SELECT * " +
+                    "FROM %s \n" +
+                    "WHERE Brand_id = ?1 \n" +
+                    "AND Product_Id = ?2 \n" +
+                    "AND ?3 BETWEEN Start_Date AND End_Date\n" +
+                    "ORDER BY priority DESC LIMIT 1",
             TABLE_NAME);
 
     public PriceProduct get(int brandId, int productId, LocalDateTime date) {
@@ -38,13 +42,8 @@ public class PriceProductRepositoryImpl implements CustomPriceProductRepository 
                 .setParameter(1, brandId)
                 .setParameter(2, productId)
                 .setParameter(3, date)
-                .setParameter(4, date)
-                .getResultList();
-        if (pricesList.isEmpty()){
-            return null;
-        } else {
-            return (PriceProduct) pricesList.get(0);
+                .getSingleResult();
+
+            return (PriceProduct) pricesList;
         }
     }
-
-}

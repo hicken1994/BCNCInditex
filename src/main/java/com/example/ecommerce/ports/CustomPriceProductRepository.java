@@ -1,6 +1,6 @@
-package com.example.ecommerce.persistence.repository;
+package com.example.ecommerce.ports;
 
-import com.example.ecommerce.domain.entities.PriceProduct;
+import com.example.ecommerce.domain.PriceProduct;
 
 import java.time.LocalDateTime;
 
