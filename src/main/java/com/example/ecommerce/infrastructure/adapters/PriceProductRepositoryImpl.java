@@ -1,4 +1,4 @@
-package com.example.ecommerce.domain.adapters;
+package com.example.ecommerce.infrastructure.adapters;
 
 import com.example.ecommerce.domain.PriceProduct;
 import com.example.ecommerce.ports.CustomPriceProductRepository;

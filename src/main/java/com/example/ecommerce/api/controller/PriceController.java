@@ -1,7 +1,7 @@
 package com.example.ecommerce.api.controller;
 
-import com.example.ecommerce.application.dto.PriceDto;
-import com.example.ecommerce.domain.adapters.dto.ProductPriceMapper;
+import com.example.ecommerce.api.dto.PriceDto;
+import com.example.ecommerce.infrastructure.adapters.dto.ProductPriceMapper;
 import com.example.ecommerce.domain.PriceProduct;
 import com.example.ecommerce.application.GetPricePerProduct;
 import com.example.ecommerce.exceptions.InditexParametersNotValid;

@@ -1,4 +1,4 @@
-package com.example.ecommerce.application.dto;
+package com.example.ecommerce.api.dto;
 
 
 import lombok.EqualsAndHashCode;

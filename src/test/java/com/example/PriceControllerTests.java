@@ -1,7 +1,7 @@
 package com.example;
 
 
-import com.example.ecommerce.application.dto.PriceDto;
+import com.example.ecommerce.api.dto.PriceDto;
 import com.example.ecommerce.infrastructure.InditexAdapter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

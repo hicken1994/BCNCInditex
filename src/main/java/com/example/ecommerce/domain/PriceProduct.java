@@ -1,5 +1,6 @@
 package com.example.ecommerce.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
+@AllArgsConstructor
 @Getter
 @ToString
 @Builder
@@ -50,25 +52,7 @@ public class PriceProduct {
    @Column(name="Last_Update_By")
    private String lastUpdateBy;
 
-
-   public PriceProduct(int productId, int brandId, int priceList, int priority, LocalDateTime startDate, LocalDateTime endDate, BigDecimal price, String curr, LocalDateTime lastUpdateDate, String lastUpdateBy) {
-      this.productId = productId;
-      this.brandId = brandId;
-      this.priceList = priceList;
-      this.priority = priority;
-      this.startDate = startDate;
-      this.endDate = endDate;
-      this.price = price;
-      this.curr = curr;
-      this.lastUpdateDate = lastUpdateDate;
-      this.lastUpdateBy = lastUpdateBy;
-   }
-
    public PriceProduct() {
-
+      //Constructor PriceProduct
    }
-
-
-
-
 }

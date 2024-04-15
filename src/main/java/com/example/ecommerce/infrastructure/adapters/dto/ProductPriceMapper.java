@@ -1,7 +1,7 @@
-package com.example.ecommerce.domain.adapters.dto;
+package com.example.ecommerce.infrastructure.adapters.dto;
 
 
-import com.example.ecommerce.application.dto.PriceDto;
+import com.example.ecommerce.api.dto.PriceDto;
 import com.example.ecommerce.domain.PriceProduct;
 import org.mapstruct.*;
 

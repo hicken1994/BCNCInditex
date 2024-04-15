@@ -3,7 +3,7 @@ package com.example.ecommerce.application;
 
 import com.example.ecommerce.domain.PriceProduct;
 import com.example.ecommerce.exceptions.InditexPriceNotFound;
-import com.example.ecommerce.domain.adapters.PriceProductRepositoryImpl;
+import com.example.ecommerce.infrastructure.adapters.PriceProductRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
