@@ -37,7 +37,7 @@ Patrón de diseño de Mapper o Data-Mapper que se utiliza para separar la lógic
 api: Contiene los controladores y DTOs, que son responsables de manejar las conexiones con el exterior.
 application: Contiene los casos de uso de la aplicación, es decir, los servicios que ejecutan la lógica de negocio.
 domain: Aquí tiene la lógica de negocio y las entidades de dominio, separadas de los detalles técnicos del sistema.
-exceptions: Este módulo que contiene todas las excepciones parece una buena práctica.
+exceptions: Este módulo que contiene todas las excepciones, tanto globales como a nivel del controlador.
 infrastructure: Contiene todos los detalles técnicos y las operaciones de bajo nivel, incluidas las implementaciones de adaptadores (por ejemplo, InditexAdapter), la lógica de mapeo y la configuración. 
 ports: Contiene las interfaces a través de las cuales la aplicación interactúa con el mundo exterior.
 
