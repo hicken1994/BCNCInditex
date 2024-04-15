@@ -33,16 +33,10 @@ import java.time.LocalDateTime;
 public class PriceController {
 
     private static final String MESSAGE_INTERNAL_ERROR = "Internal server error";
-
     private static final String MESSAGE_INVALID_PARAMETERS = "Invalid Parameters";
-
     private static final String MESSAGE_PRICE_NOT_FOUND = "Price not Found";
-
     private static final String MESSAGE_PRICE_FOUND = "Found Price!";
-
     private final ProductPriceMapper productPriceMapeo;
-
-
     private final GetPricePerProduct getPricePerProduct;
 
     @ApiOperation(value = "Get the product Price, using a brandId a productId and a Date")
@@ -59,18 +53,14 @@ public class PriceController {
     )
     @PreAuthorize("permitAll()")
     @GetMapping("/price")
-    public ResponseEntity<PriceDto> obtenerPrecioProducto(
+    public ResponseEntity<PriceDto> obtainPriceProduct(
             @ApiParam(required = true) @RequestParam("priceDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime priceDate,
             @ApiParam(required = true) @Min(1) int productId,
             @ApiParam(required = true) @Min(1) int brandId)
             throws InditexPriceNotFound, InditexParametersNotValid {
-
         log.info("PriceProduct obtained, productId <{}>, brandId<{}>, priceDate <{}>", productId, brandId, priceDate);
-
         final PriceProduct productPrice = getPricePerProduct.get(brandId, productId, priceDate);
-
         final PriceDto productPriceDto = productPriceMapeo.priceDto(productPrice);
-
         return new ResponseEntity<>(productPriceDto, HttpStatus.OK);
     }
 }

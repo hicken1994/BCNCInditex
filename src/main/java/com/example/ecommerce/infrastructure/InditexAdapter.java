@@ -41,7 +41,7 @@ public class InditexAdapter {
     @PostConstruct
     private void initDb() {
         log.info("****** Inserting Data Testing ******");
-        testDataConfigService.insertarDatosPrueba();
+        testDataConfigService.insertDataTest();
         log.info("****** Inserted Data Successfully ******");
     }
 }

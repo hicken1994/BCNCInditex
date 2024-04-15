@@ -72,7 +72,7 @@ public class E2ETest {
 
 
     @Test
-     void testGetPricebyProductBadRequest() {
+     void testGetPricebyProductForbiddenGrant() {
 
         Integer productId = 35455;
         Integer brandId = 1;

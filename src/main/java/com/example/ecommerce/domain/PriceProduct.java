@@ -1,9 +1,6 @@
 package com.example.ecommerce.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @ToString
 @Builder
+@EqualsAndHashCode
 @Table(name="PRICES")
 public class PriceProduct {
 
