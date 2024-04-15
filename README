@@ -22,28 +22,26 @@ Para la cual se uso:
 
 📐 Patrones de Diseño
 
-Modelo-Vista-Controlador (MVC): PriceController actúa como un controlador en este patrón, segregando la lógica de la vista y del modelo.
+Builder: El código proporcionado de la clase PriceProduct parece seguir el patrón de diseño 
 Repositorio: PriceProductRepositoryImpl proporciona un mecanismo para separar la lógica que recupera los datos y los asigna al objeto de entidad.
 Inyección de Dependencia (Dependency Injection): Gracias al uso de @Autowired, hemos podido seguir el Principio de Inversión de Control, 
 donde los objetos definen sus dependencias pero no se preocupan de cómo se crean.
 Casos de Uso (Use Cases): Las clases GetPricePerProduct e GetPricePerProductImpl implementan este patrón para ejemplificar un conjunto específico de acciones 
 que representan una operación realizada por el sistema o en él.
+Patrón de diseño de Mapper o Data-Mapper que se utiliza para separar la lógica de persistencia de negocio de la lógica de mapeo, en la clase Mapper
 
 
 📂 Estructura del Proyecto
-Nuestro proyecto está organizado en cinco carpetas principales, basadas en el enfoque de desarrollo de API en Spring Boot:
-API
-auth: Configuraciones de seguridad web (SpringSecurity).
-controller: Controladores de API para el manejo de precios.
-dto: Aquí se almacenan los datos después de que el controlador los mapea.
-exceptions: Las excepciones relativas a la configuración de la API.
-mapping: Realiza el mapeo de los datos entre la entidad PriceProduct y el DTO PriceDto.
-BOOT: Contiene todo lo necesario para iniciar la aplicación con Spring, incluyendo la carga de datos de prueba y mapeo de los repositorios.
-DOMAIN: Incluye las entidades y los casos de uso que se utilizan para las pruebas de la API REST.
-EXCEPTIONS: Maneja todas las excepciones del proyecto, a excepción de las que son procesadas en el módulo API.
-PERSISTENCE - REPOSITORIES: Aquí se encuentra el repositorio CustomPriceProductRepository, el cual interactúa con la BBDD para obtener detalle de la tabla Prices. 
-También gestiona instancias de EntityManager para crear y eliminar instancias persistentes en la base de datos.
 
+
+api: Contiene los controladores y DTOs, que son responsables de manejar las conexiones con el exterior.
+application: Contiene los casos de uso de la aplicación, es decir, los servicios que ejecutan la lógica de negocio.
+domain: Aquí tiene la lógica de negocio y las entidades de dominio, separadas de los detalles técnicos del sistema.
+exceptions: Este módulo que contiene todas las excepciones parece una buena práctica.
+infrastructure: Contiene todos los detalles técnicos y las operaciones de bajo nivel, incluidas las implementaciones de adaptadores (por ejemplo, InditexAdapter), la lógica de mapeo y la configuración. 
+ports: Contiene las interfaces a través de las cuales la aplicación interactúa con el mundo exterior.
+
+test: Contiene las pruebas de integracion y E2E
 La creacion de este servicio se encuentra expuesta en el siguiente link:
 
  http://localhost:9002/swagger-ui/index.html#/price-controller/getProductPrice
