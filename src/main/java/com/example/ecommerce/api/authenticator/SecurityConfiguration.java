@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
     @Override
     protected void configure(@NotNull HttpSecurity http) throws Exception {
         http
@@ -22,7 +21,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/**").authenticated()
                 .and()
-                .csrf().disable()
                 .formLogin().disable();
                  http.headers().frameOptions().disable();
     }

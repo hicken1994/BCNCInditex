@@ -1,7 +1,7 @@
 package com.example;
 
-import com.example.ecommerce.api.Dto.PriceDto;
-import com.example.ecommerce.boot.InditexAdapter;
+import com.example.ecommerce.application.dto.PriceDto;
+import com.example.ecommerce.infrastructure.InditexAdapter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ public class E2ETest {
         baseUrl = baseUrl + ":" + port + "/inditex/api/";
     }
     @Test
-    public void testGetPricePerProduct() {
+     void testGetPricePerProduct() {
 
         // Startup
         Integer productId = 35455;
@@ -54,7 +54,7 @@ public class E2ETest {
         assertThat(responseEntity.getBody().getProductId()).isEqualTo(productId);
     }
     @Test
-    public void testGetPricePerProductNotFound() {
+     void testGetPricePerProductNotFound() {
 
         Integer productId = 99999;
         Integer brandId = 1;
@@ -72,7 +72,7 @@ public class E2ETest {
 
 
     @Test
-    public void testGetPricebyProductBadRequest() {
+     void testGetPricebyProductBadRequest() {
 
         Integer productId = 35455;
         Integer brandId = 1;
@@ -84,11 +84,11 @@ public class E2ETest {
         String fullUrl = URL_TEMPLATE2.replace("brandId=?", "brandId=" + brandId)
                 .replace("productId=?", "productId=" + productId).replace("priceDate=?", "priceDate=" + priceDate);
         ResponseEntity<PriceDto> responseEntity = restTemplate.postForEntity(baseUrl.concat(fullUrl), request, PriceDto.class);
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
         assertThat(responseEntity.getBody()).isNotNull();
     }
     @Test
-    public void testGetPricePerProductByBrand() {
+     void testGetPricePerProductByBrand() {
 
         Integer productId = 35455;
         Integer brandId = 1;
@@ -105,7 +105,7 @@ public class E2ETest {
     }
 
     @Test
-    public void testGetPricePerProductByBrandNotFound() {
+     void testGetPricePerProductByBrandNotFound() {
 
         Integer productId = 99999;
         Integer brandId = 1;

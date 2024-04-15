@@ -1,9 +1,9 @@
 package com.example.ecommerce.api.controller;
 
-import com.example.ecommerce.api.Dto.PriceDto;
-import com.example.ecommerce.api.mapping.ProductPriceMapper;
-import com.example.ecommerce.domain.entities.PriceProduct;
-import com.example.ecommerce.domain.useCases.GetPricePerProduct;
+import com.example.ecommerce.application.dto.PriceDto;
+import com.example.ecommerce.domain.adapters.dto.ProductPriceMapper;
+import com.example.ecommerce.domain.PriceProduct;
+import com.example.ecommerce.application.GetPricePerProduct;
 import com.example.ecommerce.exceptions.InditexParametersNotValid;
 import com.example.ecommerce.exceptions.InditexPriceNotFound;
 import io.swagger.annotations.ApiOperation;

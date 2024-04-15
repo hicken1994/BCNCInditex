@@ -16,16 +16,16 @@ import java.time.LocalDateTime;
 public class PriceProductRepositoryImpl implements CustomPriceProductRepository {
     @PersistenceContext
     private EntityManager entityManager;
-    private final String TABLE_NAME = "PRICES";
+    public static final String TABLE = "PRICES";
 
-    private final String QUERY_GET_PRICE_PRODUCT = String.format(
-            "SELECT * " +
-                    "FROM %s \n" +
-                    "WHERE Brand_id = ?1 \n" +
-                    "AND Product_Id = ?2 \n" +
-                    "AND ?3 BETWEEN Start_Date AND End_Date\n" +
-                    "ORDER BY priority DESC LIMIT 1",
-            TABLE_NAME);
+    private final String querySelect = String.format(
+            "SELECT * ".concat(
+                    "FROM %s \n").concat(
+                    "WHERE Brand_id = ?1 \n").concat(
+                    "AND Product_Id = ?2 \n").concat(
+                    "AND ?3 BETWEEN Start_Date AND End_Date\n").concat(
+                    "ORDER BY priority DESC LIMIT 1"),
+            TABLE);
 
     public PriceProduct get(int brandId, int productId, LocalDateTime date) {
         try {
@@ -38,7 +38,7 @@ public class PriceProductRepositoryImpl implements CustomPriceProductRepository 
 
     public  PriceProduct getProduct(int brandId, int productId, LocalDateTime date) {
         var pricesList = entityManager
-                .createNativeQuery(QUERY_GET_PRICE_PRODUCT, PriceProduct.class)
+                .createNativeQuery(querySelect, PriceProduct.class)
                 .setParameter(1, brandId)
                 .setParameter(2, productId)
                 .setParameter(3, date)

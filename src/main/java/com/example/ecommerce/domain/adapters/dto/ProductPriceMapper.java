@@ -13,12 +13,13 @@ import org.mapstruct.*;
                                  nullValueMappingStrategy = NullValueMappingStrategy.RETURN_NULL)
 
 public interface ProductPriceMapper {
-     @Mappings({@Mapping(source = "productId", target = "productId"),
-            @Mapping(source = "brandId", target = "brandId"),
-            @Mapping(source = "priceList", target = "priceList"),
-            @Mapping(source = "startDate", target = "startDate"),
-            @Mapping(source = "endDate", target = "endDate"),
-            @Mapping(source = "price", target = "price")})
-    PriceDto priceDto(final PriceProduct priceProduct);
-}
 
+    @Mapping(source = "productId", target = "productId")
+    @Mapping(source = "brandId", target = "brandId")
+    @Mapping(source = "priceList", target = "priceList")
+    @Mapping(source = "startDate", target = "startDate")
+    @Mapping(source = "endDate", target = "endDate")
+    @Mapping(source = "price", target = "price")
+    PriceDto priceDto(final PriceProduct priceProduct);
+
+}

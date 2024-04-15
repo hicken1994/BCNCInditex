@@ -12,23 +12,24 @@ import org.springframework.web.context.request.WebRequest;
 
 @Slf4j
 @ControllerAdvice
-public final class GlobalContException {
+public final class GlobalContext {
 
+    private static final String error = "error";
     @ExceptionHandler(InditexPriceNotFound.class)
-    public ResponseEntity<?> handleInditexPriceNotFound(InditexPriceNotFound exception,
+    public ResponseEntity<InditexPriceNotFound> handleInditexPriceNotFound(InditexPriceNotFound exception,
                                                                                WebRequest request) {
-        return new ResponseEntity(new InditexConxServiceError(request.getParameterMap(), "error"), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new InditexPriceNotFound(error), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(InditexParametersNotValid.class)
-    public ResponseEntity<?> handleInditexParametersNotValid(InditexParametersNotValid exception,
+    public ResponseEntity<InditexParametersNotValid> handleInditexParametersNotValid(InditexParametersNotValid exception,
                                                                                    WebRequest request) {
-        return new ResponseEntity(new InditexConxServiceError(request.getParameterMap(), "error"), HttpStatus.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity<>(new InditexParametersNotValid(error), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleException(Exception exception, WebRequest request) {
+    public ResponseEntity<Exception> handleException(Exception exception, WebRequest request) {
         log.error("Exception received, message: <{}>", exception.getMessage());
-        return new ResponseEntity(new InditexConxServiceError(request.getParameterMap(), "error"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new Exception(error), HttpStatus.BAD_REQUEST);
     }
 }

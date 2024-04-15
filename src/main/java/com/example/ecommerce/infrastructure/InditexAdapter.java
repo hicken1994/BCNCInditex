@@ -16,10 +16,17 @@ import javax.annotation.PostConstruct;
 @EntityScan("com.example.ecommerce.domain")
 @Slf4j
 @ComponentScan(basePackages = {"com.example.ecommerce"})
+
 public class InditexAdapter {
 
-    @Autowired
+
     private TestDataConfigService testDataConfigService;
+
+
+    @Autowired
+    public InditexAdapter(TestDataConfigService testDataConfigService) {
+        this.testDataConfigService = testDataConfigService;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(InditexAdapter.class, args);

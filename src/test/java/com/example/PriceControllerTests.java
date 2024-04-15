@@ -1,8 +1,8 @@
 package com.example;
 
 
-import com.example.ecommerce.api.Dto.PriceDto;
-import com.example.ecommerce.boot.InditexAdapter;
+import com.example.ecommerce.application.dto.PriceDto;
+import com.example.ecommerce.infrastructure.InditexAdapter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,32 +19,31 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = InditexAdapter.class)
 class PriceControllerTests {
+
     @LocalServerPort
-    public int port;
-    private String baseUrl = "http://localhost";
+    private int port;
+    private String baseUrl;
+    private static RestTemplate templateRest;
 
     @BeforeAll
     public static void init() {
         templateRest = new RestTemplate();
-
     }
+
     @BeforeEach
     public void setUp() {
-        baseUrl = baseUrl + ":" + port + "/inditex/api/";
+        baseUrl = String.format("http://localhost:%d/inditex/api/", port);
     }
 
-    private void generateTestRequest(LocalDateTime startDate, LocalDateTime endDate, BigDecimal expectedPrice, String testUrlSuffix, int tariff) {
+    private void generateTestRequest(LocalDateTime startDate, LocalDateTime endDate, BigDecimal expectedPrice,
+                                    String testUrlSuffix, int tariff, boolean isSuccessfulTestExpected) {
         PriceDto expectedDto = new PriceDto(ID_PRODUCT, ID_BRAND, tariff, startDate, endDate, expectedPrice);
         PriceDto response = templateRest.getForObject(baseUrl + testUrlSuffix, PriceDto.class);
-        assertEquals(response, expectedDto);
+        if (isSuccessfulTestExpected)
+            assertEquals(response, expectedDto);
+        else
+            assertNotEquals(response, expectedDto);
     }
-
-    private void generateTestRequestFail(LocalDateTime startDate, LocalDateTime endDate, BigDecimal expectedPrice, String testUrlSuffix, int tariff) {
-        PriceDto expectedDto = new PriceDto(ID_PRODUCT, ID_BRAND, tariff, startDate, endDate, expectedPrice);
-        PriceDto response = templateRest.getForObject(baseUrl + testUrlSuffix, PriceDto.class);
-        assertNotEquals(response, expectedDto);
-    }
-
     @Test
     void test1_successful() {
         generateTestRequest(
@@ -52,18 +51,18 @@ class PriceControllerTests {
                 LocalDateTime.parse("2020-12-31-23.59.59", dateFormats),
                 new BigDecimal("35.50"),
                 String.format(URL_TEMPLATE, "2020-06-14T10:00:00Z"),
-                RATE_TARIFF_1);
+                RATE_TARIFF_1, true);
     }
 
 
     @Test
     void test1_fail() {
-        generateTestRequestFail(
+        generateTestRequest(
                 LocalDateTime.parse("2020-06-14-00.00.00", dateFormats),
                 LocalDateTime.parse("2020-12-31-23.59.59", dateFormats),
                 new BigDecimal("37.50"),
                 String.format(URL_TEMPLATE, "2020-06-14T10:00:00Z"),
-                RATE_TARIFF_1);
+                RATE_TARIFF_1, false);
     }
 
 
@@ -74,7 +73,7 @@ class PriceControllerTests {
                 LocalDateTime.parse("2020-06-14-18.30.00", dateFormats),
                 new BigDecimal("25.45"),
                 String.format(URL_TEMPLATE, "2020-06-14T16:00:00Z"),
-                RATE_TARIFF_2);
+                RATE_TARIFF_2,true);
     }
 
     @Test
@@ -84,7 +83,7 @@ class PriceControllerTests {
                 LocalDateTime.parse("2020-12-31-23.59.59", dateFormats),
                 new BigDecimal("35.50"),
                 String.format(URL_TEMPLATE, "2020-06-14T21:00:00Z"),
-                RATE_TARIFF_1);
+                RATE_TARIFF_1,true);
     }
 
     @Test
@@ -94,7 +93,7 @@ class PriceControllerTests {
                 LocalDateTime.parse("2020-06-15-11.00.00", dateFormats),
                 new BigDecimal("30.50"),
                 String.format(URL_TEMPLATE, "2020-06-15T10:00:00Z"),
-                RATE_TARIFF_3);
+                RATE_TARIFF_3, true);
     }
 
     @Test
@@ -104,7 +103,7 @@ class PriceControllerTests {
                 LocalDateTime.parse("2020-12-31-23.59.59", dateFormats),
                 new BigDecimal("38.95"),
                 String.format(URL_TEMPLATE, "2020-06-16T21:00:00Z"),
-                RATE_TARIFF_4);
+                RATE_TARIFF_4,true);
     }
 
     @Test
